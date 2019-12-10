@@ -9,13 +9,14 @@ namespace lab3.Models
     {
         [Key]
         [Column("id")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
 
-        [Column("user_id")]
-        public long UserId { get; set; }
+        [ForeignKey("user_id")]
+        public User User { get; set; }
 
-        [Column("chat_id")]
-        public long ChatId { get; set; }
+        [ForeignKey("chat_id")]
+        public Chat Chat { get; set; }
 
         [Column("text")]
         public string Text { get; set; }
@@ -24,16 +25,13 @@ namespace lab3.Models
         public DateTime Time { get; set; }
 
         public Message() { }
-        public Message(long id, long userId, long chatId, string text, DateTime time)
+        public Message(long id, User user, Chat chat, string text, DateTime time)
         {
             Id = id;
-            UserId = userId;
-            ChatId = chatId;
+            User = user;
+            Chat = chat;
             Text = text;
             Time = time;
         }
-
-        public virtual Chat Chat { get; set; }
-        public virtual User User { get; set; }
     }
 }

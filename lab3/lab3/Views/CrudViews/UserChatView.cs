@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.CompilerServices;
+using System.Text;
 using ConsoleTableExt;
 using lab3.Database.DAO;
 using lab3.Models;
@@ -12,7 +14,7 @@ namespace lab3.Views.CrudViews
         private readonly Dao<User> _userDao;
         private readonly Dao<Chat> _chatDao;
 
-        public UserChatView(Dao<User> userDao, Dao<Chat> chatDao) 
+        public UserChatView(Dao<User> userDao, Dao<Chat> chatDao)
             : base("User and chat relations")
         {
             _userDao = userDao;
@@ -53,6 +55,15 @@ namespace lab3.Views.CrudViews
             Console.WriteLine("Is it admin? (True/false):");
             var isAdmin = GetBool();
             return (value, isAdmin);
+        }
+
+        public void ShowSearchResult(List<UserChat> data)
+        {
+            Console.WriteLine("Result:");
+            ConsoleTableBuilder.From(DataToDataTable(data))
+                .WithFormat(ConsoleTableBuilderFormat.Alternative)
+                .ExportAndWriteLine();
+            Console.ReadKey();
         }
 
         protected override DataTable DataToDataTable(List<UserChat> data)

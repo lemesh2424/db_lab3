@@ -13,7 +13,6 @@ namespace lab3.Controllers
         private readonly Dao<Chat> _chatDao;
         private readonly Dao<UserChat> _userChatDao;
         private readonly Dao<Message> _messageDao;
-        private readonly FullTextSearch _fullTextSearch;
 
         public Controller(Context context)
         {
@@ -21,7 +20,6 @@ namespace lab3.Controllers
             _chatDao = new ChatDao(context);
             _userChatDao = new UserChatDao(context);
             _messageDao = new MessageDao(context);
-            _fullTextSearch = new FullTextSearch(context);
         }
 
         public void Begin()
@@ -33,13 +31,13 @@ namespace lab3.Controllers
                     break;
                 if (menuCom == MenuCommands.Crud)
                     BeginCrud();
-                if (menuCom == MenuCommands.Random)
-                {
-                    Console.WriteLine("Randomiser currently unavailable!");
-                    Console.ReadKey();
-                }
-                if (menuCom == MenuCommands.FullTextSearch)
-                    ExecuteFullTestSearch();
+                //if (menuCom == MenuCommands.Random)
+                //{
+                //    Console.WriteLine("Randomiser currently unavailable!");
+                //    Console.ReadKey();
+                //}
+                //if (menuCom == MenuCommands.FullTextSearch)
+                //    ExecuteFullTestSearch();
             }
         }
 
@@ -73,8 +71,8 @@ namespace lab3.Controllers
                     page--;
                 if (com == CrudOperations.PageRight)
                     page++;
-                try
-                {
+                //try
+                //{
                     if (com == CrudOperations.Create)
                         dao.Create(view.Create());
                     if (com == CrudOperations.Read)
@@ -88,11 +86,11 @@ namespace lab3.Controllers
                     if (com == CrudOperations.Create || com == CrudOperations.Delete
                                                      || com == CrudOperations.Update)
                         view.OperationStatusOutput(true);
-                }
-                catch 
-                {
-                    view.OperationStatusOutput(false);
-                }
+                //}
+                //catch 
+                //{
+                //    view.OperationStatusOutput(false);
+                //}
             }
         }
 
@@ -120,26 +118,26 @@ namespace lab3.Controllers
                 var v = view as UserChatView;
                 var d = dao as UserChatDao;
                 var query = v.Search();
-                v.ShowReadResult(d.Search(query.value, query.isAdmin));
+                v.ShowSearchResult(d.Search(query.value, query.isAdmin));
             }
         }
 
-        private void ExecuteRandomise()
-        {
-            var number = RandomiseView.ShowRandomise();
-            if (number == -1)
-                return;
-            var randomiser = new Randomiser(_userDao, _chatDao,
-                _userChatDao, _messageDao);
-            randomiser.Randomise(number);
-        }
+        //private void ExecuteRandomise()
+        //{
+        //    var number = RandomiseView.ShowRandomise();
+        //    if (number == -1)
+        //        return;
+        //    var randomiser = new Randomiser(_userDao, _chatDao,
+        //        _userChatDao, _messageDao);
+        //    randomiser.Randomise(number);
+        //}
 
-        private void ExecuteFullTestSearch()
-        {
-            var command = FullTextSearchView.Begin();
-            FullTextSearchView.ShowResults(command.Item1 == FullTextSearchCommands.FullPhrase
-                ? _fullTextSearch.GetFullPhrase("text", "message", command.Item2)
-                : _fullTextSearch.GetAllWithIncludedWord("text", "message", command.Item2));
-        }
+        //private void ExecuteFullTestSearch()
+        //{
+        //    var command = FullTextSearchView.Begin();
+        //    FullTextSearchView.ShowResults(command.Item1 == FullTextSearchCommands.FullPhrase
+        //        ? _fullTextSearch.GetFullPhrase("text", "message", command.Item2)
+        //        : _fullTextSearch.GetAllWithIncludedWord("text", "message", command.Item2));
+        //}
     }
 }

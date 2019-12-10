@@ -8,27 +8,25 @@ namespace lab3.Models
     {
         [Key]
         [Column("id")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
 
-        [Column("user_id")]
-        public long UserId { get; set; }
+        [ForeignKey("user_id")]
+        public User User { get; set; }
 
-        [Column("chat_id")]
-        public long ChatId { get; set; }
+        [ForeignKey("chat_id")]
+        public Chat Chat { get; set; }
 
         [Column("isadmin")]
         public bool IsAdmin { get; set; }
 
         public UserChat() { }
-        public UserChat(long id, long userId, long chatId, bool isAdmin)
+        public UserChat(long id, User user, Chat chat, bool isAdmin)
         {
             Id = id;
-            UserId = userId;
-            ChatId = chatId;
+            User = user;
+            Chat = chat;
             IsAdmin = isAdmin;
         }
-
-        public virtual Chat Chat { get; set; }
-        public virtual User User { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using lab3.Models;
 using Npgsql;
 using System.Linq;
@@ -28,22 +29,22 @@ namespace lab3.Database.DAO
         {
             var query = from user in context.User
                 select user;
-            return query.Take(10).Skip(page * 10).ToList();
+            return query.Skip(page * 10).Take(10).ToList();
         }
 
         public override void Update(User entity)
         {
-            
+            var upd = context.User.Single(x => x.Id == entity.Id);
+            upd.Login = entity.Login;
+            upd.Name = entity.Name;
+            upd.Bio = entity.Bio;
+            context.SaveChanges();
         }
 
         public override void Delete(long id)
         {
-            var connection = Dbconnection.Open();
-            var command = connection.CreateCommand();
-            command.CommandText = "DELETE FROM public.user WHERE id = :id";
-            command.Parameters.Add(new NpgsqlParameter("id", id));
-            command.ExecuteNonQuery();
-            Dbconnection.Close();
+            context.User.Remove(context.User.Single(x => x.Id == id));
+            context.SaveChanges();
         }
 
         public User Search(string str)

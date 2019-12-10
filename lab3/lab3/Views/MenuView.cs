@@ -16,10 +16,8 @@ namespace lab3.Views
         {
             Console.Clear();
             Console.WriteLine("1 - CRUD for entities");
-            Console.WriteLine("2 - random generation");
-            Console.WriteLine("3 - full text search");
             Console.WriteLine("0 - exit");
-            return (MenuCommands) GetNum(0, 3);
+            return (MenuCommands) GetNum(0, 1);
         }
 
         public static Entities ShowEntities()

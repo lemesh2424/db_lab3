@@ -23,7 +23,6 @@ namespace lab3.Models
             using var sr = new StreamReader("../../../DataBaseSettings.txt");
             var connectionString = sr.ReadToEnd();
             optionsBuilder.UseNpgsql(connectionString);
-
         }
     }
 }
