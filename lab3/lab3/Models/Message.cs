@@ -23,6 +23,7 @@ namespace lab3.Models
         [Column("date")]
         public DateTime Time { get; set; }
 
+        public Message() { }
         public Message(long id, long userId, long chatId, string text, DateTime time)
         {
             Id = id;
@@ -31,5 +32,8 @@ namespace lab3.Models
             Text = text;
             Time = time;
         }
+
+        public virtual Chat Chat { get; set; }
+        public virtual User User { get; set; }
     }
 }

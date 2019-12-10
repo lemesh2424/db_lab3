@@ -1,4 +1,5 @@
-﻿using lab3.Database;
+﻿using System;
+using lab3.Database;
 using lab3.Database.DAO;
 using lab3.Models;
 using lab3.Views;
@@ -6,7 +7,7 @@ using lab3.Views.CrudViews;
 
 namespace lab3.Controllers
 {
-    public class Controller
+    class Controller
     {
         private readonly Dao<User> _userDao;
         private readonly Dao<Chat> _chatDao;
@@ -14,13 +15,13 @@ namespace lab3.Controllers
         private readonly Dao<Message> _messageDao;
         private readonly FullTextSearch _fullTextSearch;
 
-        public Controller(DbConnection dbConnection)
+        public Controller(Context context)
         {
-            _userDao = new UserDao(dbConnection);
-            _chatDao = new ChatDao(dbConnection);
-            _userChatDao = new UserChatDao(dbConnection);
-            _messageDao = new MessageDao(dbConnection);
-            _fullTextSearch = new FullTextSearch(dbConnection);
+            _userDao = new UserDao(context);
+            _chatDao = new ChatDao(context);
+            _userChatDao = new UserChatDao(context);
+            _messageDao = new MessageDao(context);
+            _fullTextSearch = new FullTextSearch(context);
         }
 
         public void Begin()
@@ -33,7 +34,10 @@ namespace lab3.Controllers
                 if (menuCom == MenuCommands.Crud)
                     BeginCrud();
                 if (menuCom == MenuCommands.Random)
-                    ExecuteRandomise();
+                {
+                    Console.WriteLine("Randomiser currently unavailable!");
+                    Console.ReadKey();
+                }
                 if (menuCom == MenuCommands.FullTextSearch)
                     ExecuteFullTestSearch();
             }

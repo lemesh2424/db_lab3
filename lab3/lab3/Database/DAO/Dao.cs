@@ -5,10 +5,10 @@ namespace lab3.Database.DAO
 {
     abstract class Dao<T>
     {
-        protected Context Context;
+        protected Context context;
         protected Dao(Context context)
         {
-            Context = context;
+            this.context = context;
         }
 
         public abstract void Create(T entity);
@@ -16,6 +16,5 @@ namespace lab3.Database.DAO
         public abstract List<T> Get(int page);
         public abstract void Update(T entity);
         public abstract void Delete(long id);
-        public abstract void Clear();
     }
 }

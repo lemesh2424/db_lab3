@@ -19,6 +19,7 @@ namespace lab3.Models
         [Column("isadmin")]
         public bool IsAdmin { get; set; }
 
+        public UserChat() { }
         public UserChat(long id, long userId, long chatId, bool isAdmin)
         {
             Id = id;
@@ -26,5 +27,8 @@ namespace lab3.Models
             ChatId = chatId;
             IsAdmin = isAdmin;
         }
+
+        public virtual Chat Chat { get; set; }
+        public virtual User User { get; set; }
     }
 }

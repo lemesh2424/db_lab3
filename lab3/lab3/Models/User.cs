@@ -19,6 +19,7 @@ namespace lab3.Models
         [Column("bio")]
         public string Bio { get; set; }
 
+        public User() { }
         public User(long id, string login = null, string name = null, string bio = null)
         {
             Id = id;

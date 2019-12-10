@@ -19,6 +19,7 @@ namespace lab3.Models
         [Column("bio")]
         public string Bio { get; set; }
 
+        public Chat() { }
         public Chat(long id, string tag = null, string name = null, string bio = null)
         {
             Id = id;
