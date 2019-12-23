@@ -31,13 +31,6 @@ namespace lab3.Controllers
                     break;
                 if (menuCom == MenuCommands.Crud)
                     BeginCrud();
-                //if (menuCom == MenuCommands.Random)
-                //{
-                //    Console.WriteLine("Randomiser currently unavailable!");
-                //    Console.ReadKey();
-                //}
-                //if (menuCom == MenuCommands.FullTextSearch)
-                //    ExecuteFullTestSearch();
             }
         }
 
@@ -71,26 +64,19 @@ namespace lab3.Controllers
                     page--;
                 if (com == CrudOperations.PageRight)
                     page++;
-                //try
-                //{
-                    if (com == CrudOperations.Create)
-                        dao.Create(view.Create());
-                    if (com == CrudOperations.Read)
-                        view.ShowReadResult(dao.Get(view.Read()));
-                    if (com == CrudOperations.Update)
-                        dao.Update(view.Update(dao.Get(view.Read())));
-                    if (com == CrudOperations.Delete)
-                        dao.Delete(view.Read());
-                    if (com == CrudOperations.Search)
-                        ExecuteSearch(view, dao);
-                    if (com == CrudOperations.Create || com == CrudOperations.Delete
-                                                     || com == CrudOperations.Update)
-                        view.OperationStatusOutput(true);
-                //}
-                //catch 
-                //{
-                //    view.OperationStatusOutput(false);
-                //}
+                if (com == CrudOperations.Create)
+                    dao.Create(view.Create());
+                if (com == CrudOperations.Read)
+                    view.ShowReadResult(dao.Get(view.Read()));
+                if (com == CrudOperations.Update)
+                    dao.Update(view.Update(dao.Get(view.Read())));
+                if (com == CrudOperations.Delete)
+                    dao.Delete(view.Read());
+                if (com == CrudOperations.Search)
+                    ExecuteSearch(view, dao);
+                if (com == CrudOperations.Create || com == CrudOperations.Delete
+                                                    || com == CrudOperations.Update)
+                    view.OperationStatusOutput(true);
             }
         }
 
@@ -121,23 +107,5 @@ namespace lab3.Controllers
                 v.ShowSearchResult(d.Search(query.value, query.isAdmin));
             }
         }
-
-        //private void ExecuteRandomise()
-        //{
-        //    var number = RandomiseView.ShowRandomise();
-        //    if (number == -1)
-        //        return;
-        //    var randomiser = new Randomiser(_userDao, _chatDao,
-        //        _userChatDao, _messageDao);
-        //    randomiser.Randomise(number);
-        //}
-
-        //private void ExecuteFullTestSearch()
-        //{
-        //    var command = FullTextSearchView.Begin();
-        //    FullTextSearchView.ShowResults(command.Item1 == FullTextSearchCommands.FullPhrase
-        //        ? _fullTextSearch.GetFullPhrase("text", "message", command.Item2)
-        //        : _fullTextSearch.GetAllWithIncludedWord("text", "message", command.Item2));
-        //}
     }
 }
