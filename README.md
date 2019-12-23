@@ -1,4 +1,4 @@
-# KP72_Tiutiunnyk_Petro_DB3
+# db_lab3
 Third Lab Databases
 --------------------
-Variant #20
+Variant #11
